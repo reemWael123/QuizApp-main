@@ -1,0 +1,5 @@
+<div *ngIf="seconds >= 0">
+  <p class="m-0 main-color">
+    {{ Math.floor(seconds / 60) }} : {{ seconds % 60 | number : "2.0" }}
+  </p>
+</div>

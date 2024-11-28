@@ -1,0 +1,11 @@
+<div class="d-flex justify-content-between align-items-center border-bottom">
+  <h5 class="mb-0 ps-5 title">{{ title }}</h5>
+  <div class="d-flex align-items-center justify-content-end actions">
+    <div class="border-start p-4" *ngIf="isSubmit">
+      <mat-icon (click)="submit()">check</mat-icon>
+    </div>
+    <div class="border-start p-4" *ngIf="isClose">
+      <mat-icon (click)="close()">close</mat-icon>
+    </div>
+  </div>
+</div>

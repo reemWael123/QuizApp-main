@@ -1,0 +1,20 @@
+<aside>
+  <div class="bg-main-color sidebar border-end">
+    <div class="menu">
+      <ng-container *ngFor="let item of list">
+        <a
+          class="d-flex align-items-center gap-2 p-3 border-top item"
+          *ngIf="item.active"
+          [routerLink]="item.link"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: true }"
+        >
+          <span class="bg-secondary-color p-2 rounded-2 icon">
+            <mat-icon>{{ item.icon }}</mat-icon>
+          </span>
+          <span class="ternary-color">{{ item.label }}</span>
+        </a>
+      </ng-container>
+    </div>
+  </div>
+</aside>

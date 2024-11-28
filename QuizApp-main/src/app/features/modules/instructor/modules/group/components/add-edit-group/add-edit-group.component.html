@@ -1,0 +1,54 @@
+<app-modal-action-header
+  title="Set up a new group"
+  [isSubmit]="true"
+  [isClose]="true"
+  (onSubmit)="handleSubmit()"
+  (onClose)="handleClose()"
+></app-modal-action-header>
+
+<div class="px-5 pt-4 pb-5" [formGroup]="groupForm">
+  <mat-form-field
+    class="d-block mt-3 mb-4 input-prefix-label-container"
+    appearance="outline"
+  >
+    <div matTextPrefix class="input-prefix-label">Group Name</div>
+    <input matInput type="text" formControlName="name" required />
+
+    <mat-error
+      *ngIf="groupForm.controls.name.touched && groupForm.controls.name.errors"
+    >
+      <ng-container *ngIf="groupForm.controls.name.errors['required']">
+        Group name is required
+      </ng-container>
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field
+    class="d-block input-prefix-label-container"
+    appearance="outline"
+  >
+    <div matTextPrefix class="input-prefix-label">List students</div>
+    <mat-select
+      class="d-block input-prefix-label-container"
+      formControlName="students"
+      [multiple]="true"
+    >
+      <mat-option
+        *ngFor="let student of studentsDropDown"
+        [value]="student._id"
+        >{{ student.first_name + " " + student.last_name }}</mat-option
+      >
+    </mat-select>
+
+    <mat-error
+      *ngIf="
+        groupForm.controls.students.touched &&
+        groupForm.controls.students.errors
+      "
+    >
+      <ng-container *ngIf="groupForm.controls.students.errors['required']">
+        You should assign at least one student
+      </ng-container>
+    </mat-error>
+  </mat-form-field>
+</div>

@@ -1,0 +1,126 @@
+<section>
+  <div class="container">
+    <div class="d-flex align-items-center justify-content-between">
+      <xng-breadcrumb></xng-breadcrumb>
+      <div
+        class="d-flex align-items-center pointer py-2 px-3 btn-border gap-1"
+        (click)="AddStudent()"
+      >
+        <mat-icon matSuffix class="toggle-icon ternary-color"
+          >add_circle</mat-icon
+        >
+        <p class="m-0 ternary-color">Add Student</p>
+      </div>
+    </div>
+
+    <div class="p-3 mt-3 border">
+      <div class="d-flex align-items-center justify-content-between mb-3">
+        <h5 class="ternary-color">Students List</h5>
+      </div>
+      <mat-tab-group class="mb-4" (selectedIndexChange)="onTabChange()">
+        <mat-tab label="All students">
+          <div class="row g-2 mt-4 mx-0">
+            <ng-container *ngFor="let student of paginatedStudents">
+              <div class="col-6">
+                <div
+                  class="d-flex justify-content-between align-items-center border p-3 pointer"
+                >
+                  <div>
+                    <h6 class="m-0 ternary-color">
+                      Student : {{ student.first_name }} {{ student.last_name }}
+                    </h6>
+                  </div>
+                  <div class="d-flex align-items-center gap-1">
+                    <mat-icon
+                      class="ternary-color pointer"
+                      (click)="viewStudent(student)"
+                      >visibility</mat-icon
+                    >
+                    <mat-icon
+                      class="ternary-color pointer"
+                      (click)="editStudent(student)"
+                      >edit_square</mat-icon
+                    >
+                    <mat-icon
+                      class="ternary-color pointer"
+                      (click)="deleteStudentDialog(student)"
+                      >delete</mat-icon
+                    >
+                  </div>
+                </div>
+              </div>
+            </ng-container>
+          </div>
+          <app-paginator
+            [length]="students.length"
+            [pageSize]="pageSize"
+            [pageIndex]="pageIndex"
+            [pageSizeOptions]="pageSizeOptions"
+            (pageEvent)="handlePageEvent($event)"
+          ></app-paginator>
+        </mat-tab>
+        <mat-tab label="Students without groups">
+          <div class="row g-2 mt-4 mx-0">
+            <ng-container *ngFor="let student of studentsWithoutGroup">
+              <div class="col-6">
+                <div
+                  class="d-flex justify-content-between align-items-center border p-3"
+                >
+                  <h6 class="m-0">
+                    Student : {{ student.first_name }} {{ student.last_name }}
+                  </h6>
+                  <div
+                    class="d-flex align-items-center pointer py-2 px-3 btn-border gap-1"
+                    (click)="AddTOGroup(student)"
+                  >
+                    <mat-icon matSuffix class="toggle-icon ternary-color"
+                      >add_circle</mat-icon
+                    >
+                    <p class="m-0 ternary-color">Add to group</p>
+                  </div>
+                </div>
+              </div>
+            </ng-container>
+          </div>
+        </mat-tab>
+        <mat-tab label="Groups list">
+          <mat-tab-group
+            [(selectedIndex)]="selectedGroupTabIndex"
+            mat-stretch-tabs="false"
+            mat-align-tabs="center"
+            (selectedIndexChange)="getGroupByID(groups[$event]._id)"
+          >
+            <mat-tab [label]="group.name" *ngFor="let group of groups">
+              <div class="row g-2 mt-4 mx-0">
+                <ng-container *ngFor="let student of studentFiltrationGroup">
+                  <div class="col-6">
+                    <div
+                      class="d-flex justify-content-between align-items-center border p-3"
+                    >
+                      <h6 class="m-0">
+                        Student : {{ student.first_name }}
+                        {{ student.last_name }}
+                      </h6>
+                      <div class="d-flex align-items-center gap-1">
+                        <mat-icon
+                          class="ternary-color pointer"
+                          (click)="editStudent(student, group._id)"
+                          >edit_square</mat-icon
+                        >
+                        <mat-icon
+                          class="ternary-color pointer"
+                          (click)="deleteStudentDialog(student, true ,group._id)"
+                          >delete</mat-icon
+                        >
+                      </div>
+                    </div>
+                  </div>
+                </ng-container>
+              </div>
+            </mat-tab>
+          </mat-tab-group>
+        </mat-tab>
+      </mat-tab-group>
+    </div>
+  </div>
+</section>

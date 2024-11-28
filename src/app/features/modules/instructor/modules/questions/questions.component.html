@@ -1,0 +1,20 @@
+<div class="d-flex align-items-center justify-content-between">
+  <xng-breadcrumb></xng-breadcrumb>
+  <div class="d-flex align-items-center pointer py-2 px-3 btn-border gap-1" (click)="onAddAction()">
+    <mat-icon matSuffix class="toggle-icon ternary-color">add_circle</mat-icon>
+    <p class="m-0 ternary-color">Add Question</p>
+  </div>
+</div>
+<h5>Bank of Questions</h5>
+
+<app-list
+  [headers]="columns"
+  [data]="paginatedQuestionsList"
+  [isPaginated]="true"
+  [length]="length"
+  [pageIndex]="0"
+  (handleViewEvent)="onViewAction($event)"
+  (handleEditEvent)="onEditAction($event)"
+  (handleDeleteEvent)="onDeleteAction($event)"
+  (handlePageEvent)="onPaginationAction($event)"
+></app-list>

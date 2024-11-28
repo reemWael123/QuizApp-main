@@ -1,0 +1,92 @@
+<section>
+  <xng-breadcrumb></xng-breadcrumb>
+  <div class="container">
+    <div class="row my-3">
+      <div class="col-md-6">
+        <div class="border p-4">
+          <div class="d-flex justify-content-between">
+            <h5 class="ternary-color">Upcoming 5 quizzes</h5>
+            <a routerLink="/dashboard/instructor/quizzes">
+              <span class="ternary-color">Quiz directory</span>
+              <i class="fa-solid fa-arrow-right ms-2 quaternary-color"></i
+            ></a>
+          </div>
+          <div
+            class="border m-2 container"
+            *ngFor="let item of quizzes; let i = index"
+          >
+            <div class="row align-items-center">
+              <div class="col-md-2 p-0">
+                <img
+                  [src]="
+                    i % 2 === 0
+                      ? '../../../assets/images/quiz-img1.svg'
+                      : '../../../assets/images/quiz-img2.svg'
+                  "
+                  class="bg-secondary-color w-100 rounded-2"
+                />
+              </div>
+              <div class="col-md-10">
+                <div class="d-flex flex-column">
+                  <h6 class="ternary-color">{{ item.title }}</h6>
+                  <small class="ternary-color">{{
+                    item.schadule | date : "dd / MM / yyyy | hh:mm a":'UTC'
+                  }}</small>
+                  <small
+                    class="fw-bold ternary-color d-flex justify-content-between overflow-hidden"
+                    >No. of student’s enrolled:{{ item.participants }}
+                    <a
+                      routerLink="/dashboard/instructor/quizzes/details/{{
+                        item._id
+                      }}"
+                    >
+                      <span class="ternary-color">Open</span>
+                      <i
+                        class="fa-solid fa-arrow-right ms-2 quaternary-color"
+                      ></i
+                    ></a>
+                  </small>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="border p-4">
+          <div class="d-flex justify-content-between">
+            <h5 class="ternary-color">Top 5 Students</h5>
+            <a routerLink="/dashboard/instructor/students">
+              <span class="ternary-color">All students</span>
+              <i class="fa-solid fa-arrow-right ms-2 quaternary-color"></i
+            ></a>
+          </div>
+
+          <div class="border m-2" *ngFor="let item of students; let i = index">
+            <div class="row align-items-center">
+              <div class="col-md-2 image-container">
+                <img
+                  [src]="images[i]"
+                  alt="Image"
+                  *ngIf="images[i]"
+                  class="w-100"
+                />
+              </div>
+              <div class="col-md-10">
+                <h6>{{ item.first_name }}</h6>
+                <small class="ternary-color"
+                  >Class: {{ item.group.name }}</small
+                >
+                |
+                <small class="ternary-color"
+                  >Average score: {{ item.avg_score / 10 | percent }}</small
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

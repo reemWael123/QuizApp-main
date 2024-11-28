@@ -1,0 +1,127 @@
+<div class="container">
+  <div class="row">
+    <div class="col-9">
+      <div class="border overflow-hidden">
+        <div
+          class="bg-ternary-color main-color p-4 d-flex justify-content-between align-items-center"
+        >
+          <h5>{{ questions.data.title }}</h5>
+          <div class="d-flex align-items-center gap-3">
+            <div class="example-button-container" (click)="resetAnswers()">
+              <button
+                mat-mini-fab
+                class="bg-secondary"
+                aria-label="Example icon button with a filter list icon"
+              >
+                <mat-icon class="main-color">restart_alt</mat-icon>
+              </button>
+            </div>
+            <div class="example-button-container" (click)="resetAnswers()">
+              <button
+                mat-mini-fab
+                class="bg-secondary"
+                aria-label="Example icon button with a filter list icon"
+              >
+                <mat-icon class="main-color">timer</mat-icon>
+              </button>
+            </div>
+            <app-countdown [minutes]="questions.data.duration"></app-countdown>
+          </div>
+        </div>
+
+        <div class="p-4">
+          <div *ngFor="let item of questions.data.questions; let i = index">
+            <div [hidden]="currentStep !== i">
+              <h6 class="mb-4 ternary-color">{{ item.title }}?</h6>
+              <div class="row m-0">
+                <div class="col-md-6" (click)="chooseAnswer(item._id, 'A')">
+                  <a
+                    class="option"
+                    [ngClass]="{
+                      'bg-quaternary-color': selectedAnswers[item._id] === 'A'
+                    }"
+                  >
+                    {{ item.options.A }}
+                  </a>
+                </div>
+                <div class="col-md-6" (click)="chooseAnswer(item._id, 'B')">
+                  <a
+                    class="option"
+                    [ngClass]="{
+                      'bg-quaternary-color': selectedAnswers[item._id] === 'B'
+                    }"
+                  >
+                    {{ item.options.B }}
+                  </a>
+                </div>
+                <div class="col-md-6" (click)="chooseAnswer(item._id, 'C')">
+                  <a
+                    class="option"
+                    [ngClass]="{
+                      'bg-quaternary-color': selectedAnswers[item._id] === 'C'
+                    }"
+                  >
+                    {{ item.options.C }}
+                  </a>
+                </div>
+                <div class="col-md-6" (click)="chooseAnswer(item._id, 'D')">
+                  <a
+                    class="option"
+                    [ngClass]="{
+                      'bg-quaternary-color': selectedAnswers[item._id] === 'D'
+                    }"
+                  >
+                    {{ item.options.D }}
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="d-flex justify-content-end align-items-center">
+            <button
+              *ngIf="currentStep > 0"
+              class="rounded-3 bg-ternary-color custom-fab px-5 me-2 mt-4"
+              type="submit"
+              (click)="navigateQuestion(currentStep - 1)"
+            >
+              <span class="main-color">Previous</span>
+            </button>
+            <button
+              *ngIf="currentStep < noOfQuestions - 1"
+              class="rounded-3 bg-ternary-color custom-fab px-5 me-2 mt-4"
+              type="submit"
+              (click)="navigateQuestion(currentStep + 1)"
+            >
+              <span class="main-color">Next</span>
+            </button>
+            <button
+              class="rounded-3 bg-ternary-color custom-fab px-5 me-2 mt-4"
+              type="submit"
+              (click)="submitQuiz()"
+              *ngIf="answers.length == noOfQuestions"
+            >
+              <span class="main-color">Submit</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-3 border overflow-hidden p-4">
+      <h5 class="mb-3">
+        Question {{ currentStep + 1 }} /
+        {{ this.noOfQuestions }}
+      </h5>
+      <div class="row mx-0">
+        <div
+          class="col-2 ps-0"
+          *ngFor="let step of this.questions.data.questions; let i = index"
+          (click)="navigateQuestion(i)"
+        >
+          <div class="step" [ngClass]="getStepStyle(i, step)">
+            {{ i + 1 }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

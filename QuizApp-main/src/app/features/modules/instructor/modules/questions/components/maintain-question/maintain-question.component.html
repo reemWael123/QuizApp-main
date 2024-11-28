@@ -1,0 +1,231 @@
+<app-modal-action-header
+  title="Set up a new question"
+  [isSubmit]="!isView"
+  [isClose]="true"
+  (onSubmit)="handleSubmit()"
+  (onClose)="handleClose()"
+></app-modal-action-header>
+
+<div
+  class="px-5 pt-4 pb-5 row mx-0 justify-content-end"
+  [formGroup]="questionForm"
+>
+  <div class="col-md-12 mb-1">
+    <mat-form-field
+      class="w-100 input-prefix-label-container"
+      appearance="outline"
+    >
+      <div matTextPrefix class="input-prefix-label">Title</div>
+      <input matInput type="text" formControlName="title" />
+
+      <mat-error
+        *ngIf="
+          questionForm.controls.title.touched &&
+          questionForm.controls.title.errors
+        "
+      >
+        <ng-container *ngIf="questionForm.controls.title.errors['required']">
+          Title is required
+        </ng-container>
+      </mat-error>
+    </mat-form-field>
+  </div>
+
+  <div class="col-md-12 mb-1">
+    <mat-form-field
+      class="w-100 input-prefix-label-container"
+      appearance="outline"
+    >
+      <div matTextPrefix class="textarea-prefix-label">Description</div>
+      <textarea matInput type="text" formControlName="description"></textarea>
+
+      <mat-error
+        *ngIf="
+          questionForm.controls.description.touched &&
+          questionForm.controls.description.errors
+        "
+      >
+        <ng-container
+          *ngIf="questionForm.controls.description.errors['required']"
+        >
+          Description is required
+        </ng-container>
+      </mat-error>
+    </mat-form-field>
+  </div>
+
+  <div class="col-md-6 mb-1">
+    <mat-form-field
+      class="w-100 input-prefix-label-container"
+      appearance="outline"
+    >
+      <div matTextPrefix class="input-prefix-label">A</div>
+      <input matInput type="text" formControlName="optionA" />
+
+      <mat-error
+        *ngIf="
+          questionForm.controls.optionA.touched &&
+          questionForm.controls.optionA.errors
+        "
+      >
+        <ng-container *ngIf="questionForm.controls.optionA.errors['required']">
+          Option is required
+        </ng-container>
+      </mat-error>
+    </mat-form-field>
+  </div>
+
+  <div class="col-md-6 mb-1">
+    <mat-form-field
+      class="w-100 input-prefix-label-container"
+      appearance="outline"
+    >
+      <div matTextPrefix class="input-prefix-label">B</div>
+      <input matInput type="text" formControlName="optionB" />
+
+      <mat-error
+        *ngIf="
+          questionForm.controls.optionB.touched &&
+          questionForm.controls.optionB.errors
+        "
+      >
+        <ng-container *ngIf="questionForm.controls.optionB.errors['required']">
+          Option is required
+        </ng-container>
+      </mat-error>
+    </mat-form-field>
+  </div>
+
+  <div class="col-md-6 mb-1">
+    <mat-form-field
+      class="w-100 input-prefix-label-container"
+      appearance="outline"
+    >
+      <div matTextPrefix class="input-prefix-label">C</div>
+      <input matInput type="text" formControlName="optionC" />
+
+      <mat-error
+        *ngIf="
+          questionForm.controls.optionC.touched &&
+          questionForm.controls.optionC.errors
+        "
+      >
+        <ng-container *ngIf="questionForm.controls.optionC.errors['required']">
+          Option is required
+        </ng-container>
+      </mat-error>
+    </mat-form-field>
+  </div>
+
+  <div class="col-md-6 mb-1">
+    <mat-form-field
+      class="w-100 input-prefix-label-container"
+      appearance="outline"
+    >
+      <div matTextPrefix class="input-prefix-label">D</div>
+      <input matInput type="text" formControlName="optionD" />
+
+      <mat-error
+        *ngIf="
+          questionForm.controls.optionD.touched &&
+          questionForm.controls.optionD.errors
+        "
+      >
+        <ng-container *ngIf="questionForm.controls.optionD.errors['required']">
+          Option is required
+        </ng-container>
+      </mat-error>
+    </mat-form-field>
+  </div>
+
+  <div class="col-md-4 mb-1">
+    <mat-form-field
+      class="w-100 input-prefix-label-container"
+      appearance="outline"
+    >
+      <div matTextPrefix class="input-prefix-label">Type</div>
+      <mat-select
+        class="input-prefix-label-container"
+        formControlName="type"
+        [multiple]="false"
+      >
+        <mat-option *ngFor="let type of typeDropDown" [value]="type.value">{{
+          type.label
+        }}</mat-option>
+      </mat-select>
+
+      <mat-error
+        *ngIf="
+          questionForm.controls.type.touched &&
+          questionForm.controls.type.errors
+        "
+      >
+        <ng-container *ngIf="questionForm.controls.type.errors['required']">
+          Type is required
+        </ng-container>
+      </mat-error>
+    </mat-form-field>
+  </div>
+
+  <div class="col-md-4 mb-1">
+    <mat-form-field
+      class="w-100 input-prefix-label-container"
+      appearance="outline"
+    >
+      <div matTextPrefix class="input-prefix-label">Difficulty</div>
+      <mat-select
+        class="input-prefix-label-container"
+        formControlName="difficulty"
+        [multiple]="false"
+      >
+        <mat-option
+          *ngFor="let difficulty of difficultyDropDown"
+          [value]="difficulty"
+          >{{ difficulty | titlecase }}</mat-option
+        >
+      </mat-select>
+
+      <mat-error
+        *ngIf="
+          questionForm.controls.difficulty.touched &&
+          questionForm.controls.difficulty.errors
+        "
+      >
+        <ng-container
+          *ngIf="questionForm.controls.difficulty.errors['required']"
+        >
+          Difficulty is required
+        </ng-container>
+      </mat-error>
+    </mat-form-field>
+  </div>
+
+  <div class="col-md-4 mb-1">
+    <mat-form-field
+      class="w-100 input-prefix-label-container"
+      appearance="outline"
+    >
+      <div matTextPrefix class="input-prefix-label">Answer</div>
+      <mat-select
+        class="input-prefix-label-container"
+        formControlName="answer"
+        [multiple]="false"
+      >
+        <mat-option *ngFor="let answer of answerDropDown" [value]="answer">{{
+          answer
+        }}</mat-option>
+      </mat-select>
+
+      <mat-error
+        *ngIf="
+          questionForm.controls.answer.touched &&
+          questionForm.controls.answer.errors
+        "
+      >
+        <ng-container *ngIf="questionForm.controls.answer.errors['required']">
+          Right answer is required
+        </ng-container>
+      </mat-error>
+    </mat-form-field>
+  </div>
+</div>

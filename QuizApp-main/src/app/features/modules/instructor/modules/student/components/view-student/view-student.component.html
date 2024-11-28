@@ -1,0 +1,19 @@
+<xng-breadcrumb></xng-breadcrumb>
+<div class="container d-flex justify-content-center">
+<mat-card class="student-card rounded mt-5 p-4">
+    <div class="d-flex">
+    <mat-icon class="mx-1">account_circle</mat-icon>
+      <mat-card-title class="ms-2">{{studentDetails.first_name+" "+studentDetails.last_name}}</mat-card-title>
+
+    </div>
+    <img class="w-50 align-self-center" mat-card-image src="../../../../../../../../assets/images/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg" alt="Photo of a Shiba Inu">
+    <mat-card-content class="mx-auto">
+      <p class="d-flex mt-1"><mat-icon class="mx-1">email</mat-icon> : {{studentDetails.email}}</p>
+      <p class="d-flex mt-1"><mat-icon class="mx-1">groups</mat-icon> : {{studentDetails.group.name}}</p>
+      
+    </mat-card-content>
+    <mat-card-actions class="mx-auto my-4">
+      <button mat-raised-button color="warn" (click)="removeStudentDialog()">Remove from group</button>
+    </mat-card-actions>
+  </mat-card>
+</div>

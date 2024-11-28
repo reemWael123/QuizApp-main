@@ -1,0 +1,36 @@
+<app-modal-action-header
+  title="Add student to group"
+  [isSubmit]="true"
+  [isClose]="true"
+  (onSubmit)="onSubmit()"
+  (onClose)="onClose()"
+></app-modal-action-header>
+
+<div class="container">
+  <div class="row p-5 pt-4">
+    <div
+      class="col-12 d-flex align-items-center flex-column justify-content-center"
+    >
+      <mat-form-field class="w-100">
+        <mat-label>Select Group</mat-label>
+        <mat-select [(ngModel)]="selectGroupID">
+          <mat-option *ngFor="let group of data.groups" [value]="group._id">
+            {{ group.name }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field class="w-100">
+        <mat-label>Select Student</mat-label>
+        <mat-select [(ngModel)]="selectStudentID">
+          <mat-option
+            *ngFor="let student of data.students"
+            [value]="student._id"
+          >
+            {{ student.first_name }}{{ student.last_name }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,63 @@
+<nav class="bg-main-color">
+  <div class="container-fluid">
+    <div class="row">
+      <div
+        class="col-2 d-flex align-items-center justify-content-between border-end py-3"
+      >
+        <div class="logo">
+          <img src="../../../../assets/images/Logo icon.svg" alt="logo" />
+        </div>
+        <mat-icon matSuffix class="toggle-icon fs-2 pointer ternary-color"
+          >menu</mat-icon
+        >
+      </div>
+      <div
+        class="col-7 d-flex align-items-center justify-content-between border-end py-3"
+      >
+        <h3 class="m-0 ternary-color">Dashboard</h3>
+        <div
+          class="d-flex align-items-center pointer py-2 px-3 btn-border gap-1"
+        >
+          <mat-icon matSuffix class="toggle-icon ternary-color">alarm</mat-icon>
+          <p
+            class="m-0 ternary-color"
+            (click)="addQuiz()"
+            *ngIf="role === 'Instructor'"
+          >
+            New Quiz
+          </p>
+          <p
+            class="m-0 ternary-color"
+            (click)="joinQuiz()"
+            *ngIf="role === 'Student'"
+          >
+            Join Quiz
+          </p>
+        </div>
+      </div>
+      <div class="col-3 d-flex justify-content-between align-items-center py-3">
+        <div>
+          <h6 class="mb-0 ternary-color">{{ email }}</h6>
+          <small class="quaternary-color fw-bold">{{ role }}</small>
+        </div>
+        <button
+          mat-icon-button
+          [matMenuTriggerFor]="menu"
+          aria-label="Example icon-button with a menu"
+        >
+          <mat-icon class="ternary-color">keyboard_arrow_down</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item (click)="changePassword()">
+            <mat-icon class="ternary-color">lock_open</mat-icon>
+            <span class="ternary-color">Change Password</span>
+          </button>
+          <button mat-menu-item (click)="logout()">
+            <mat-icon class="ternary-color">logout</mat-icon>
+            <span class="ternary-color">Logout</span>
+          </button>
+        </mat-menu>
+      </div>
+    </div>
+  </div>
+</nav>

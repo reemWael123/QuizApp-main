@@ -1,0 +1,93 @@
+<section>
+  <xng-breadcrumb class="mb-3"></xng-breadcrumb>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="row p-0 justify-content-between">
+        <div class="col-md-6">
+          <div
+            class="card border-1 pointer p-3 gap-3 justify-content-center align-items-center"
+          >
+            <img
+              src="../../../../../../assets/images/new quiz icon.svg"
+              alt="quiz-icon"
+            />
+            <p class="m-0 fw-bold fs-4">Set up a new quiz</p>
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <div
+            class="card border-1 pointer p-3 gap-3 justify-content-center align-items-center"
+            routerLink="/dashboard/instructor/questions"
+          >
+            <img
+              src="../../../../../../assets/images/Vault icon.svg"
+              alt="quiz-icon"
+            />
+            <p class="m-0 fw-bold fs-4">Questions bank</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="border mt-4 p-3">
+        <div class="d-flex justify-content-between align-items-center m-2">
+          <h5>Completed quizzes</h5>
+          <a routerLink="/dashboard/instructor/results">
+            <span class="ternary-color">Results</span>
+            <i class="fa-solid fa-arrow-right ms-2 quaternary-color"></i
+          ></a>
+        </div>
+        <app-list [headers]="columns" [data]="completedQuizzes"></app-list>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="border p-4">
+        <div class="d-flex justify-content-between align-items-center m-2">
+          <h5 class="ternary-color">Upcoming 5 quizzes</h5>
+          <a routerLink="/dashboard/instructor/quizzes/allQuizzes">
+            <span class="ternary-color">All Quizzes</span>
+            <i class="fa-solid fa-arrow-right ms-2 quaternary-color"></i
+          ></a>
+        </div>
+        <div
+          class="border m-2 container"
+          *ngFor="let item of IncomingQuizzes; let i = index"
+        >
+          <div class="row align-items-center">
+            <div class="col-md-2 p-0">
+              <img
+                [src]="
+                  i % 2 === 0
+                    ? '../../../assets/images/quiz-img1.svg'
+                    : '../../../assets/images/quiz-img2.svg'
+                "
+                class="img-color w-100 rounded-2 bg-secondary-color"
+              />
+            </div>
+            <div class="col-md-10">
+              <div class="d-flex flex-column">
+                <h6 class="ternary-color">{{ item.title }}</h6>
+                <small class="ternary-color">{{
+                  item.schadule | date : "dd / MM / yyyy | hh:mm a"
+                }}</small>
+                <small
+                  class="fw-bold ternary-color d-flex justify-content-between overflow-hidden"
+                  >No. of student’s enrolled:{{ item.participants }}
+                  <a
+                    [routerLink]="[
+                      '/dashboard/instructor/quizzes/details',
+                      item._id
+                    ]"
+                  >
+                    <span class="ternary-color">Open</span>
+                    <i class="fa-solid fa-arrow-right ms-2 quaternary-color"></i
+                  ></a>
+                </small>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

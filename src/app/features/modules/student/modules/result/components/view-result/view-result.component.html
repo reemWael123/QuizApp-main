@@ -1,0 +1,26 @@
+<ng-container *ngIf="percentage !== undefined">
+  <div class="d-flex justify-content-end p-3">
+    <mat-icon class="close" (click)="close()">close</mat-icon>
+  </div>
+
+  <div class="container">
+    <div class="row px-5 pb-3">
+      <div
+        class="col-12 d-flex align-items-center flex-column justify-content-center"
+      >
+        <ng-container *ngIf="percentage >= 50; else failed">
+          <h4 class="fw-bold">Score: {{ percentage }}%</h4>
+          <mat-icon class="status success">sentiment_very_satisfied</mat-icon>
+          <h3>Congratulations, {{ userName }}!</h3>
+          <p>You've successfully passed the quiz!</p>
+        </ng-container>
+        <ng-template #failed>
+          <h4 class="fw-bold">Score: {{ percentage }}%</h4>
+          <mat-icon class="status fail">sentiment_very_dissatisfied</mat-icon>
+          <h3>Hard Luck, {{ userName }}!</h3>
+          <p>You've unfortunately failed the quiz!</p>
+        </ng-template>
+      </div>
+    </div>
+  </div>
+</ng-container>

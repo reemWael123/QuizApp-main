@@ -1,0 +1,12 @@
+.date-time-input {
+  border: none;
+
+  &:focus {
+    outline: none;
+  }
+}
+
+.input-prefix-label-container .input-prefix-label,
+.input-prefix-label-container .textarea-prefix-label {
+  min-width: 200px;
+}

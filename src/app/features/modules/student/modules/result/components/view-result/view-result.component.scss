@@ -1,0 +1,25 @@
+.mat-icon.status {
+  margin: 0 5px;
+
+  font-size: 120px;
+  height: 120px;
+  width: 120px;
+}
+
+.mat-icon.success {
+  color: #7cb342 !important;
+}
+
+.mat-icon.fail {
+  color: #f44336 !important;
+}
+
+.mat-icon.close {
+  font-weight: 900;
+
+  font-size: 30px;
+  height: 30px;
+  width: 30px;
+
+  cursor: pointer;
+}

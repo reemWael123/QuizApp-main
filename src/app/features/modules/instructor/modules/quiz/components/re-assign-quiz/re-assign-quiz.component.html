@@ -1,0 +1,75 @@
+<app-modal-action-header
+  title="Set up a new quiz"
+  [isSubmit]="true"
+  [isClose]="true"
+  (onSubmit)="reassign()"
+  (onClose)="onClose()"
+></app-modal-action-header>
+
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-12">
+      <div class="p-4 border">
+        <form [formGroup]="quizForm" class="row p-0 m-0">
+          <div class="my-3 d-flex align-items-center gap-2">
+            <mat-icon class="ternar-color"
+              >calendar_month</mat-icon
+            >
+            <input
+              class="date-time-input"
+              [min]="today"
+              type="datetime-local"
+              formControlName="schadule"
+            />
+          </div>
+
+          <mat-form-field
+            class="w-100 input-prefix-label-container mb-2"
+            appearance="outline"
+          >
+            <div matTextPrefix class="input-prefix-label">Group name</div>
+            <mat-select formControlName="group">
+              <mat-option *ngFor="let group of groups" [value]="group._id">
+                {{ group.name }}
+              </mat-option>
+            </mat-select>
+
+            <mat-error
+              *ngIf="
+                quizForm.controls.group.touched &&
+                quizForm.controls.group.errors
+              "
+            >
+              <ng-container *ngIf="quizForm.controls.group.errors['required']">
+                Group is required
+              </ng-container>
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field
+            class="w-100 input-prefix-label-container mb-2"
+            appearance="outline"
+          >
+            <div matTextPrefix class="input-prefix-label">
+              Duration (in minutes)
+            </div>
+            <input matInput type="number" formControlName="duration" />
+
+            <mat-error
+              *ngIf="
+                quizForm.controls.duration.touched &&
+                quizForm.controls.duration.errors
+              "
+            >
+              <ng-container
+                *ngIf="quizForm.controls.duration.errors['required']"
+              >
+                Duration is required
+              </ng-container>
+            </mat-error>
+          </mat-form-field>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,254 @@
+<app-modal-action-header
+  *ngIf="!quizID"
+  title="Set up a new quiz"
+  [isSubmit]="true"
+  [isClose]="true"
+  (onSubmit)="addQuiz()"
+  (onClose)="onClose()"
+></app-modal-action-header>
+
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-12">
+      <div class="p-4" [class.border]="quizID">
+        <div
+          class="d-flex justify-content-between align-items-center"
+          *ngIf="isViewMode"
+        >
+          <h5 class="ternary-color mb-3" *ngIf="quizID">
+            {{ isViewMode ? "View Quiz" : "Edit Quiz" }}
+          </h5>
+          <a
+            class="rounded-3 bg-ternary-color custom-fab px-5"
+            routerLink="/dashboard/instructor/quizzes/editQuiz/{{ quizID }}"
+          >
+            <span class="main-color">{{ "Edit quiz" }}</span>
+            <mat-icon class="main-color fs-6">{{ "edit" }}</mat-icon>
+          </a>
+        </div>
+
+        <form
+          [formGroup]="quizForm"
+          (ngSubmit)="editQuiz()"
+          class="row p-0 m-0"
+        >
+          <div class="my-3 d-flex align-items-center gap-2">
+            <mat-icon class="ternar-color" *ngIf="isViewMode"
+              >calendar_month</mat-icon
+            >
+            <input
+              class="date-time-input"
+              [min]="today"
+              type="datetime-local"
+              formControlName="schadule"
+            />
+          </div>
+
+          <mat-form-field
+            class="w-100 input-prefix-label-container mb-2"
+            appearance="outline"
+          >
+            <div matTextPrefix class="input-prefix-label">Title</div>
+            <input matInput type="text" formControlName="title" />
+
+            <mat-error
+              *ngIf="
+                quizForm.controls.title.touched &&
+                quizForm.controls.title.errors
+              "
+            >
+              <ng-container *ngIf="quizForm.controls.title.errors['required']">
+                Title is required
+              </ng-container>
+            </mat-error>
+          </mat-form-field>
+
+          <div class="col-md-4">
+            <mat-form-field
+              class="w-100 input-prefix-label-container mb-2"
+              appearance="outline"
+            >
+              <div matTextPrefix class="input-prefix-label">
+                Duration (in minutes)
+              </div>
+              <input matInput type="number" formControlName="duration" />
+
+              <mat-error
+                *ngIf="
+                  quizForm.controls.duration.touched &&
+                  quizForm.controls.duration.errors
+                "
+              >
+                <ng-container
+                  *ngIf="quizForm.controls.duration.errors['required']"
+                >
+                  Duration is required
+                </ng-container>
+              </mat-error>
+            </mat-form-field>
+          </div>
+
+          <div class="col-md-4">
+            <mat-form-field
+              class="w-100 input-prefix-label-container mb-2"
+              appearance="outline"
+            >
+              <div matTextPrefix class="input-prefix-label">NO.questions</div>
+              <input matInput type="number" formControlName="questions_number" />
+
+              <mat-error
+                *ngIf="
+                  quizForm.controls.questions_number.touched &&
+                  quizForm.controls.questions_number.errors
+                "
+              >
+                <ng-container
+                  *ngIf="quizForm.controls.questions_number.errors['required']"
+                >
+                  Number of questions is required
+                </ng-container>
+              </mat-error>
+            </mat-form-field>
+          </div>
+
+          <div class="col-md-4">
+            <mat-form-field
+              class="w-100 input-prefix-label-container mb-2"
+              appearance="outline"
+            >
+              <div matTextPrefix class="input-prefix-label">
+                Score per question
+              </div>
+              <input
+                matInput
+                type="number"
+                formControlName="score_per_question"
+              />
+
+              <mat-error
+                *ngIf="
+                  quizForm.controls.score_per_question.touched &&
+                  quizForm.controls.score_per_question.errors
+                "
+              >
+                <ng-container
+                  *ngIf="
+                    quizForm.controls.score_per_question.errors['required']
+                  "
+                >
+                  Score is required
+                </ng-container>
+              </mat-error>
+            </mat-form-field>
+          </div>
+
+          <mat-form-field
+            class="w-100 input-prefix-label-container mb-2"
+            appearance="outline"
+          >
+            <div matTextPrefix class="input-prefix-label">Description</div>
+            <input matInput type="text" formControlName="description" />
+          </mat-form-field>
+
+          <div class="col-md-4 mb-2">
+            <mat-form-field
+              class="w-100 input-prefix-label-container"
+              appearance="outline"
+            >
+              <div matTextPrefix class="input-prefix-label">
+                Difficulty level
+              </div>
+              <mat-select formControlName="difficulty">
+                <mat-option
+                  *ngFor="let difficulty of difficultyDropDown"
+                  [value]="difficulty"
+                  >{{ difficulty | titlecase }}</mat-option
+                >
+              </mat-select>
+
+              <mat-error
+                *ngIf="
+                  quizForm.controls.difficulty.touched &&
+                  quizForm.controls.difficulty.errors
+                "
+              >
+                <ng-container
+                  *ngIf="quizForm.controls.difficulty.errors['required']"
+                >
+                  Difficulty is required
+                </ng-container>
+              </mat-error>
+            </mat-form-field>
+          </div>
+
+          <div class="col-md-4 mb-2">
+            <mat-form-field
+              class="w-100 input-prefix-label-container"
+              appearance="outline"
+            >
+              <div matTextPrefix class="input-prefix-label">Category Type</div>
+              <mat-select formControlName="type">
+                <mat-option
+                  *ngFor="let type of typeDropDown"
+                  [value]="type.value"
+                  >{{ type.label }}</mat-option
+                >
+              </mat-select>
+
+              <mat-error
+                *ngIf="
+                  quizForm.controls.type.touched &&
+                  quizForm.controls.type.errors
+                "
+              >
+                <ng-container *ngIf="quizForm.controls.type.errors['required']">
+                  Type is required
+                </ng-container>
+              </mat-error>
+            </mat-form-field>
+          </div>
+
+          <div class="col-md-4 mb-2">
+            <mat-form-field
+              class="w-100 input-prefix-label-container mb-2"
+              appearance="outline"
+            >
+              <div matTextPrefix class="input-prefix-label">Group name</div>
+              <mat-select formControlName="group">
+                <mat-option *ngFor="let group of groups" [value]="group._id">
+                  {{ group.name }}
+                </mat-option>
+              </mat-select>
+
+              <mat-error
+                *ngIf="
+                  quizForm.controls.group.touched &&
+                  quizForm.controls.group.errors
+                "
+              >
+                <ng-container
+                  *ngIf="quizForm.controls.group.errors['required']"
+                >
+                  Group is required
+                </ng-container>
+              </mat-error>
+            </mat-form-field>
+          </div>
+
+          <div
+            class="d-flex justify-content-end align-items-center"
+            *ngIf="!isViewMode && quizID"
+          >
+            <button
+              class="rounded-3 bg-ternary-color custom-fab px-5"
+              type="submit"
+            >
+              <span class="main-color">Edit quiz</span>
+              <mat-icon class="main-color fs-6">edit</mat-icon>
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

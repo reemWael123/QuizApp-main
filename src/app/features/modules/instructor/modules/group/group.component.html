@@ -1,0 +1,51 @@
+<section>
+  <div class="container">
+    <div class="d-flex align-items-center justify-content-between">
+      <xng-breadcrumb></xng-breadcrumb>
+      <div
+        class="d-flex align-items-center pointer py-2 px-3 btn-border gap-1"
+        (click)="addGroup()"
+      >
+        <mat-icon matSuffix class="toggle-icon ternary-color"
+          >add_circle</mat-icon
+        >
+        <p class="m-0 ternary-color">Add Group</p>
+      </div>
+    </div>
+
+    <div class="p-3 mt-3 border">
+      <h5 class="mb-4">Groups List</h5>
+      <div class="row g-2 mx-0">
+        <ng-container *ngFor="let group of groups">
+          <div class="col-6">
+            <div
+              class="d-flex justify-content-between align-items-center border p-3"
+            >
+              <div>
+                <h6>Group : {{ group.name }}</h6>
+                <small>No. of students : {{ group.students.length }}</small>
+              </div>
+              <div class="d-flex align-items-center gap-1">
+                <mat-icon
+                  class="ternary-color pointer"
+                  (click)="viewGroup(group)"
+                  >visibility</mat-icon
+                >
+                <mat-icon
+                  class="ternary-color pointer"
+                  (click)="editGroup(group)"
+                  >edit_square</mat-icon
+                >
+                <mat-icon
+                  class="ternary-color pointer"
+                  (click)="deleteGroupDialog(group)"
+                  >delete</mat-icon
+                >
+              </div>
+            </div>
+          </div>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+</section>

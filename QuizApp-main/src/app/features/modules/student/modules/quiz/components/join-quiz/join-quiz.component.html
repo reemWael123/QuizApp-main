@@ -1,0 +1,31 @@
+<app-modal-action-header
+  title="Join Quiz"
+  [isSubmit]="true"
+  [isClose]="true"
+  (onSubmit)="joinQuiz()"
+  (onClose)="onClose()"
+></app-modal-action-header>
+
+<div class="container">
+  <div class="row p-4">
+    <p class="text-center">Input the code received for the quiz to join</p>
+    <mat-form-field
+      class="w-100 input-prefix-label-container mb-2"
+      appearance="outline"
+    >
+      <div matTextPrefix class="input-prefix-label">Code</div>
+      <input
+        matInput
+        type="text"
+        [(ngModel)]="code"
+        required
+        #codeInput="ngModel"
+      />
+      <mat-error *ngIf="codeInput.invalid && codeInput.touched">
+        <ng-container *ngIf="codeInput.errors && codeInput.errors['required']">
+          Code is required
+        </ng-container>
+      </mat-error>
+    </mat-form-field>
+  </div>
+</div>

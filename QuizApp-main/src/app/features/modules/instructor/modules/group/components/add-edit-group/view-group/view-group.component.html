@@ -1,0 +1,34 @@
+<app-modal-action-header
+  title="View group"
+  [isSubmit]="false"
+  [isClose]="true"
+  (onClose)="handleClose()"
+></app-modal-action-header>
+
+<div class="px-5 pt-4 pb-5" [formGroup]="groupForm">
+  <mat-form-field
+    class="d-block mt-3 mb-4 input-prefix-label-container"
+    appearance="outline"
+  >
+    <div matTextPrefix class="input-prefix-label">Group Name</div>
+    <input matInput type="text" formControlName="name" />
+  </mat-form-field>
+
+  <mat-form-field
+    class="d-block input-prefix-label-container"
+    appearance="outline"
+  >
+    <div matTextPrefix class="input-prefix-label">List students</div>
+    <mat-select
+      class="d-block input-prefix-label-container"
+      formControlName="students"
+      [multiple]="true"
+    >
+      <mat-option
+        *ngFor="let student of studentsDropDown"
+        [value]="student._id"
+        >{{ student.first_name + " " + student.last_name }}</mat-option
+      >
+    </mat-select>
+  </mat-form-field>
+</div>
